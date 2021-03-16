@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Card, Image } from "semantic-ui-react";
+import { Button, Card, Container, Image } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
 import "./Blog.css";
@@ -44,7 +44,7 @@ const BlogList = () => {
         return blogs.data.map((blog) => {
           console.log(blogs.data);
           return (
-            <div className="view" key={blog._id}>
+            <div style={{ margin: "2rem" }} className="view" key={blog._id}>
               <Card>
                 <Image src={blog.image} wrapped ui={false} />
                 <Card.Content>
@@ -69,9 +69,11 @@ const BlogList = () => {
   };
 
   return (
-    <div style={{ marginTop: "3rem" }}>
-      <h2>My Ways Blog</h2>
-      <div className="lay">{renderContent()}</div>
+    <div className="blog-list">
+      <Container>
+        <h1>My Ways Blog</h1>
+        <div className="lay">{renderContent()}</div>
+      </Container>
     </div>
   );
 };

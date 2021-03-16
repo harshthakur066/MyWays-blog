@@ -26,3 +26,15 @@ flex-direction: row;
     flex-wrap: wrap;
     /* justify-self: ; */
 }
+
+.blog-list {
+ margin-top: 5rem;
+ padding-bottom: 6rem;
+ display: flex;
+ flex-direction: column;
+ /* margin: 6rem;
+ margin-right: unset; */
+ /* margin-left: 5rem; */
+ 
+    /* marginTop: "4rem", paddingBottom: "6rem", display: "flex" */
+}
