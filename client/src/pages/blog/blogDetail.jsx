@@ -29,19 +29,22 @@ const BlogDetail = () => {
         return <h4>Loading...</h4>;
       default:
         return (
-          <div>
-            <div>
-              {" "}
-              <img src={blog.image} alt="pic" />{" "}
+          <div className="all">
+            <div className="pic">
+              <img width="800px" height="400px" src={blog.image} alt="pic" />
             </div>
-            <div>
-              <img src={myWays} alt="myWays" />
-              <div>MyWays</div>
-              <div>Mar 02, 2021 - 8 min Read</div>
-              <Button primary>Share</Button>
+            <div className="section">
+              <div className="section">
+                <img src={myWays} alt="myWays" />
+                <h3>MyWays</h3>
+              </div>
+              <h5 style={{ marginTop: "2.5rem" }}>Mar 02, 2021 - 8 min Read</h5>
+              <div style={{ marginTop: "1rem" }}>
+                <Button primary>Share</Button>
+              </div>
             </div>
-            <div>Introduction</div>
-            <div>{blog.content}</div>
+            <h1>Introduction</h1>
+            <h6>{blog.content}</h6>
           </div>
         );
     }

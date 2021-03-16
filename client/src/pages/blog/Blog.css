@@ -3,3 +3,17 @@
     flex-wrap: wrap;
 flex-direction: row;
 }
+
+.all {
+    margin: 5rem;
+    padding-bottom: 7rem;
+}
+
+.pic {
+    text-align: center;
+}
+
+.section {
+    display: flex;
+    justify-content: space-around;
+}
