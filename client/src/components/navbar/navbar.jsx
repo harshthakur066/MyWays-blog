@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useContext } from "react";
 import { Button } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
+import { Context as UserContext } from "../../context/userContext";
 
 import myWays from "../../assets/myWays.png";
 import "./Navbar.css";
 
 const Navbar = () => {
   const history = useHistory();
+  const { state } = useContext(UserContext);
 
-  const [user, setUser] = useState({});
-
-  const getUser = () => {};
-  useEffect(() => {
-    getUser();
-  });
+  console.log("user state", state);
 
   return (
     <div>

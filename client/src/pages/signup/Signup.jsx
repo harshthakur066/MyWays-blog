@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Form, Message, Button } from "semantic-ui-react";
 import axios from "axios";
+import { Context as UserContext } from "../../context/userContext";
 
 import AuthForm from "../../components/authForm/AuthForm";
 
@@ -9,6 +10,8 @@ import "./Signup.css";
 import "../signin/Signin.css";
 
 const SignUp = () => {
+  const { fetchUser } = useContext(UserContext);
+
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -24,6 +27,7 @@ const SignUp = () => {
       console.log("Starting");
       const token = await axios.post("/api/v1/signup", body);
       console.log("token", token);
+      fetchUser(token);
       // alert("Form Submitted");
     } catch (err) {
       setErrorMsg(err.message);
