@@ -1,9 +1,13 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
+import { useHistory } from "react-router-dom";
+
 import myWays from "../../assets/myWays.png";
-import "./navbar.css";
+import "./Navbar.css";
 
 const Navbar = () => {
+  const history = useHistory();
+
   return (
     <div>
       <nav className="white">
@@ -16,21 +20,32 @@ const Navbar = () => {
           </a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li className="item">
-              <Button basic color="teal">
+              <Button
+                onClick={() => history.push("/signin")}
+                basic
+                color="teal"
+              >
                 LOG IN
               </Button>
             </li>
             <li>
-              <Button color="teal darken-3">REGISTER</Button>
+              <Button
+                onClick={() => history.push("/signup")}
+                color="teal darken-3"
+              >
+                REGISTER
+              </Button>
             </li>
             {/*Logged in items  */}
             <li className="item">
-              <Button basic color="teal">
+              <Button onClick={() => history.push("/")} basic color="teal">
                 SETTNGS
               </Button>
             </li>
             <li>
-              <Button color="teal darken-3">LOG OUT</Button>
+              <Button onClick={() => history.push("/")} color="teal darken-3">
+                LOG OUT
+              </Button>
             </li>
           </ul>
         </div>
