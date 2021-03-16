@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
+const blogRoutes = require("./routes/blogRoutes");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use(authRoutes);
+app.use(blogRoutes);
 
 // Mongoose Connection
 mongoose.connect(

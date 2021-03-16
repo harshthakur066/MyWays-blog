@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Form, Message, Button } from "semantic-ui-react";
+import axios from "axios";
 
 import AuthForm from "../../components/authForm/AuthForm";
 
@@ -13,11 +14,29 @@ const SignIn = () => {
 
   const history = useHistory();
 
+  const formSubmit = async (body) => {
+    try {
+      setErrorMsg("");
+      console.log("Starting");
+      const token = await axios.post("/api/v1/signin", body);
+      console.log("token", token);
+      // alert("Form Submitted");
+    } catch (err) {
+      setErrorMsg(err.message);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       // To do
+      const userForm = {
+        email: email,
+        password: password,
+      };
+      formSubmit(userForm);
+
       setEmail("");
       setPassword("");
       history.push("/");

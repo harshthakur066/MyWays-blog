@@ -1,10 +1,11 @@
 const express = require("express");
-const router = express.Router();
 
 const Blog = require("../models/Blog");
 const User = require("../models/User");
 
-const isUser = require("../middlewares/requireAuth");
+// const isUser = require("../middlewares/requireAuth");
+
+const router = express.Router();
 
 // To get all blogs
 router.get("/api/v1/blog", async (req, res) => {
@@ -30,7 +31,7 @@ router.get("/api/v1/blog/:blogId", async (req, res) => {
 });
 
 // To get all blogs of a speific user
-router.get("/api/v1/blog/:userId", isUser, async (req, res) => {
+router.get("/api/v1/blog/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
     const blog = await Blog.find({ userId: userId });
@@ -42,17 +43,17 @@ router.get("/api/v1/blog/:userId", isUser, async (req, res) => {
 });
 
 // To post  blogs
-router.post("/api/v1/blog/:userId", isUser, async (req, res) => {
+router.post("/api/v1/blog/:userId", async (req, res) => {
   const { userId } = req.params;
   const { name, image, content } = req.body;
   try {
     const blog = new Blog({
       name,
-      userId,
       image,
       content,
     });
     await blog.save();
+    res.send(blog);
     const currentuser = await User.findById(userId);
     currentuser.blogs.push(blog._id);
   } catch (err) {
@@ -61,7 +62,7 @@ router.post("/api/v1/blog/:userId", isUser, async (req, res) => {
 });
 
 // To update a blog
-router.put("/api/v1/blog/:blogId", isUser, async (req, res) => {
+router.put("/api/v1/blog/:blogId", async (req, res) => {
   const { blogId } = req.params;
   const { name, image, content } = req.body;
 
@@ -79,67 +80,67 @@ router.put("/api/v1/blog/:blogId", isUser, async (req, res) => {
 });
 
 // To delete a blog
-router.delete('/api/v1/blog/:blogId', isUser, (req,res) => {
-    const {blogId} = req.params;
-    try{
-        const blog = await Blog.findByIdAndDelete(blogId);
-        const currentuser = await User.findById(blog.userId);
-        currentuser.blogs = currentuser.blogs.filter(
-          (id) => id != blogId
-        );
-        await User.findByIdAndUpdate(blog.userId, currentuser);
-    }catch(err) {
-        return res.status(500).json({ error: err.message });
-    }
+router.delete("/api/v1/blog/:blogId", async (req, res) => {
+  const { blogId } = req.params;
+  try {
+    const blog = await Blog.findByIdAndDelete(blogId);
+    const currentuser = await User.findById(blog.userId);
+    currentuser.blogs = currentuser.blogs.filter((id) => id != blogId);
+    await User.findByIdAndUpdate(blog.userId, currentuser);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
 });
 
-// To add a comment 
-router.post('/api/v1/blog/:blogId/comment', (req,res) => {
-    const {blogId} = req.params;
-    const {comment} = req.body;
-    try {
-        const blog = await findById(blogId);
-        blog.comments.push(comment);
-        res.json(blog);
-    }catch(err){
-return res.status(500).json({ error: err.message });
-    }
+// To add a comment
+router.post("/api/v1/blog/:blogId/comment", async (req, res) => {
+  const { blogId } = req.params;
+  const { comment } = req.body;
+  try {
+    const blog = await findById(blogId);
+    blog.comments.push(comment);
+    res.json(blog);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
 });
 
 // TO add a like
-router.put('api/v1/:blogId/like', (req,res) => {
-    const {blogId} = req.params;
-    try {
-        const blog = await Blog.findById(blogId);
-  
-        await Blog.updateOne(blog, {
-          $inc: { likes: 1 },
-          function(err, res) {
-            if (err) throw err;
-            res.send("Successfully updated");
-          },
-        });
-        res.status(200).send(post);
-      } catch (error) {
-        res.status(422).send(err);
-      }
+router.put("api/v1/:blogId/like", async (req, res) => {
+  const { blogId } = req.params;
+  try {
+    const blog = await Blog.findById(blogId);
+
+    await Blog.updateOne(blog, {
+      $inc: { likes: 1 },
+      function(err, res) {
+        if (err) throw err;
+        res.send("Successfully updated");
+      },
+    });
+    res.status(200).send(post);
+  } catch (error) {
+    res.status(422).send(err);
+  }
 });
 
 // To dislike
-router.put('api/v1/:blogId/dislike', (req,res) => {
-    const {blogId} = req.params;
-    try {
-        const blog = await Blog.findById(blogId);
-  
-        await Blog.updateOne(blog, {
-          $inc: { likes: -1 },
-          function(err, res) {
-            if (err) throw err;
-            res.send("Successfully updated");
-          },
-        });
-        res.status(200).send(post);
-      } catch (error) {
-        res.status(422).send(err);
-      }
+router.put("api/v1/:blogId/dislike", async (req, res) => {
+  const { blogId } = req.params;
+  try {
+    const blog = await Blog.findById(blogId);
+
+    await Blog.updateOne(blog, {
+      $inc: { likes: -1 },
+      function(err, res) {
+        if (err) throw err;
+        res.send("Successfully updated");
+      },
+    });
+    res.status(200).send(post);
+  } catch (error) {
+    res.status(422).send(err);
+  }
 });
+
+module.exports = router;

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Button } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
@@ -7,6 +8,13 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const history = useHistory();
+
+  const [user, setUser] = useState({});
+
+  const getUser = () => {};
+  useEffect(() => {
+    getUser();
+  });
 
   return (
     <div>

@@ -18,6 +18,18 @@ const SignUp = () => {
 
   const history = useHistory();
 
+  const formSubmit = async (body) => {
+    try {
+      setErrorMsg("");
+      console.log("Starting");
+      const token = await axios.post("/api/v1/signup", body);
+      console.log("token", token);
+      // alert("Form Submitted");
+    } catch (err) {
+      setErrorMsg(err.message);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -27,7 +39,13 @@ const SignUp = () => {
     }
 
     try {
-      // To do
+      const userForm = {
+        name: displayName,
+        phone: phone,
+        email: email,
+        password: password,
+      };
+      formSubmit(userForm);
 
       setDisplayName("");
       setEmail("");
