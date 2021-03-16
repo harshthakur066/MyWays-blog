@@ -4,9 +4,9 @@ import { useHistory } from "react-router-dom";
 import { Context as UserContext } from "../../context/userContext";
 
 import myWays from "../../assets/myWays.png";
-import "./Navbar.css";
+import "./Header.css";
 
-const Navbar = () => {
+const Header = () => {
   const history = useHistory();
   const { state } = useContext(UserContext);
 
@@ -106,4 +106,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;
