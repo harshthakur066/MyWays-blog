@@ -43,19 +43,20 @@ router.get("/api/v1/blog/:userId", async (req, res) => {
 });
 
 // To post  blogs
-router.post("/api/v1/blog/:userId", async (req, res) => {
-  const { userId } = req.params;
-  const { name, image, content } = req.body;
+router.post("/api/v1/blog", async (req, res) => {
+  // const { userId } = req.params;
+  const { name, image, summary, content } = req.body;
   try {
     const blog = new Blog({
       name,
       image,
+      summary,
       content,
     });
     await blog.save();
     res.send(blog);
-    const currentuser = await User.findById(userId);
-    currentuser.blogs.push(blog._id);
+    // const currentuser = await User.findById(userId);
+    // currentuser.blogs.push(blog._id);
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
@@ -64,11 +65,12 @@ router.post("/api/v1/blog/:userId", async (req, res) => {
 // To update a blog
 router.put("/api/v1/blog/:blogId", async (req, res) => {
   const { blogId } = req.params;
-  const { name, image, content } = req.body;
+  const { name, image, summary, content } = req.body;
 
   let update = {
     name,
     image,
+    summary,
     content,
   };
   try {

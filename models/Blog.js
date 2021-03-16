@@ -5,7 +5,8 @@ const blogSchema = new mongoose.Schema({
   name: String,
   userId: String,
   image: String,
-  cotent: String,
+  summary: String,
+  content: String,
   likes: { type: Number, default: 0, min: 0 },
   comments: [
     {
