@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Button, Card, Container, Image } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
+import { Context as UserContext } from "../../context/userContext";
 
 import "./Blog.css";
 
 const BlogList = () => {
   const history = useHistory();
+  const { state } = useContext(UserContext);
 
   const [blogs, setBlogs] = useState(null);
 
@@ -74,6 +76,13 @@ const BlogList = () => {
         <h1>My Ways Blog</h1>
         <div className="lay">{renderContent()}</div>
       </Container>
+      {state ? null : (
+        <div className="fixed-action-btn ">
+          <Button onClick={() => history.push("/signin")} color="teal">
+            Login
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

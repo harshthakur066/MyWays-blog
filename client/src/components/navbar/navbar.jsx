@@ -54,8 +54,8 @@ const Navbar = () => {
                 <li>
                   <Button
                     onClick={() => {
-                      window.location.reload();
                       history.push("/");
+                      window.location.reload();
                     }}
                     color="teal darken-3"
                   >
