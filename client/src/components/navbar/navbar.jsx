@@ -46,7 +46,11 @@ const Navbar = () => {
             </li>
             {/*Logged in items  */}
             <li className="item">
-              <Button onClick={() => history.push("/")} basic color="teal">
+              <Button
+                onClick={() => history.push("/blog/add")}
+                basic
+                color="teal"
+              >
                 ADD
               </Button>
             </li>
