@@ -23,7 +23,7 @@ const Navbar = () => {
             </div>
           </a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li className="item">
+            {/* <li className="item">
               <Button
                 onClick={() => history.push("/signin")}
                 basic
@@ -39,9 +39,53 @@ const Navbar = () => {
               >
                 REGISTER
               </Button>
-            </li>
+            </li> */}
+            {state ? (
+              <div>
+                <li className="item">
+                  <Button
+                    onClick={() => history.push("/blog/post")}
+                    basic
+                    color="teal"
+                  >
+                    ADD
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    onClick={() => {
+                      window.location.reload();
+                      history.push("/");
+                    }}
+                    color="teal darken-3"
+                  >
+                    LOG OUT
+                  </Button>
+                </li>
+              </div>
+            ) : (
+              <div>
+                <li className="item">
+                  <Button
+                    onClick={() => history.push("/signin")}
+                    basic
+                    color="teal"
+                  >
+                    LOG IN
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    onClick={() => history.push("/signup")}
+                    color="teal darken-3"
+                  >
+                    REGISTER
+                  </Button>
+                </li>
+              </div>
+            )}
             {/*Logged in items  */}
-            <li className="item">
+            {/* <li className="item">
               <Button
                 onClick={() => history.push("/blog/post")}
                 basic
@@ -54,7 +98,7 @@ const Navbar = () => {
               <Button onClick={() => history.push("/")} color="teal darken-3">
                 LOG OUT
               </Button>
-            </li>
+            </li> */}
           </ul>
         </div>
       </nav>
