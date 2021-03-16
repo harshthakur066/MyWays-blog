@@ -12,7 +12,7 @@ import SignUp from "./pages/signup/Signup";
 import BlogPost from "./pages/blog/BlogPost";
 import BlogNew from "./pages/blog/BlogNew";
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://myways-blog.herokuapp.com/";
 
 function App() {
   return (
