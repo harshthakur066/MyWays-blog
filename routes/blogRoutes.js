@@ -98,9 +98,11 @@ router.delete("/api/v1/blog/:blogId", async (req, res) => {
 router.post("/api/v1/blog/:blogId/comment", async (req, res) => {
   const { blogId } = req.params;
   const { comment } = req.body;
+  console.log(comment);
   try {
-    const blog = await findById(blogId);
-    blog.comments.push(comment);
+    const blog = await Blog.findById(blogId);
+    await Blog.updateOne(blog, blog.comments.push(comment));
+    await blog.save();
     res.json(blog);
   } catch (err) {
     return res.status(500).json({ error: err.message });
@@ -120,7 +122,7 @@ router.put("api/v1/:blogId/like", async (req, res) => {
         res.send("Successfully updated");
       },
     });
-    res.status(200).send(post);
+    res.status(200).send(blog);
   } catch (error) {
     res.status(422).send(err);
   }
@@ -139,7 +141,7 @@ router.put("api/v1/:blogId/dislike", async (req, res) => {
         res.send("Successfully updated");
       },
     });
-    res.status(200).send(post);
+    res.status(200).send(blog);
   } catch (error) {
     res.status(422).send(err);
   }

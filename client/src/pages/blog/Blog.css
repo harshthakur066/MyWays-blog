@@ -10,10 +10,12 @@ flex-direction: row;
 }
 
 .pic {
-    text-align: center;
+    display: flex; 
+    justify-content: center;
 }
 
 .section {
     display: flex;
     justify-content: space-around;
+    flex-wrap:wrap
 }

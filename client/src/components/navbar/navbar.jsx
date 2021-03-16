@@ -47,7 +47,7 @@ const Navbar = () => {
             {/*Logged in items  */}
             <li className="item">
               <Button onClick={() => history.push("/")} basic color="teal">
-                SETTNGS
+                ADD
               </Button>
             </li>
             <li>
