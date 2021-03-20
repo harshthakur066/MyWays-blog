@@ -1,4 +1,4 @@
-# MyWays Blog Task
+# MyWays Blog
 
 This is a MERN project in which user can view different blogs and make an account to add his/her own blogs.
 
