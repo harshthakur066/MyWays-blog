@@ -8,9 +8,9 @@ import "./Header.css";
 
 const Header = () => {
   const history = useHistory();
-  const { state } = useContext(UserContext);
+  const { logout } = useContext(UserContext);
 
-  console.log("user state", state);
+  // console.log("user state", state);
 
   return (
     <div>
@@ -40,7 +40,7 @@ const Header = () => {
                 REGISTER
               </Button>
             </li> */}
-            {state ? (
+            {localStorage.getItem("token") ? (
               <div>
                 <li className="item">
                   <Button
@@ -54,8 +54,8 @@ const Header = () => {
                 <li>
                   <Button
                     onClick={() => {
-                      history.push("/");
-                      window.location.reload();
+                      logout();
+                      console.log("logout call");
                     }}
                     color="teal darken-3"
                   >

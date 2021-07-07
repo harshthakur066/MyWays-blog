@@ -44,7 +44,7 @@ const BlogList = () => {
       default:
         // return ;
         return blogs.data.map((blog) => {
-          console.log(blogs.data);
+          // console.log(blogs.data);
           return (
             <div style={{ margin: "2rem" }} className="view" key={blog._id}>
               <Card>
