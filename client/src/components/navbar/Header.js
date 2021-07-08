@@ -55,6 +55,7 @@ const Header = () => {
                   <Button
                     onClick={() => {
                       logout();
+                      history.push("/");
                       console.log("logout call");
                     }}
                     color="teal darken-3"
